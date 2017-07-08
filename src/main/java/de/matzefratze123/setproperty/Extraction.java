@@ -39,7 +39,7 @@ public class Extraction {
       if (v == null || v.length() == 0) {
         if (defaultValue != null) {
           properties.setProperty(property, defaultValue);
-          log.info("Setting property '" + property + "' to default value '" + defaultValue + "'");
+          log.info("No match was found for property '" + property + "', setting to default value '" + defaultValue + "'");
         } else {
           log.info("No match was found for property '" + property);
         }
@@ -48,7 +48,12 @@ public class Extraction {
         log.info("Setting property '" + property + "' to '" + v + "'");
       }
     } else {
-      log.info("No match was found for property '" + property);
+      if (defaultValue != null) {
+        properties.setProperty(property, defaultValue);
+        log.info("No match was found for property '" + property + "', setting to default value '" + defaultValue + "'");
+      } else {
+        log.info("No match was found for property '" + property);
+      }
     }
   }
 
