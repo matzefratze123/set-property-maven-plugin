@@ -20,12 +20,15 @@ public class Extraction {
 
     if (property == null) {
       log.warn("'property' element of 'extraction' element is required. skipped");
+      return;
     }
     if (text == null) {
       log.warn("'value' element of 'extraction' element is required. skipped");
+      return;
     }
     if (regex == null) {
       log.warn("'regex' element of 'extraction' element is required. skipped");
+      return;
     }
 
     Pattern pattern = caseSensitive ? Pattern.compile(regex) : Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
