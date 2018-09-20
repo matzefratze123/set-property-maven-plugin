@@ -60,6 +60,22 @@ Example configuration:
               </setpropertiesfalse>
             </operation>
           </operations>
+          <extractions>
+            <extraction>
+              <!--
+              Control maven deployment to deploy snapshot, version based on gitlab build number or skip deployment
+              Extracts XXX from [DEPLOY XXX] which should be should be one of VERSION, SNAPSHOT, SKIP
+              just [DEPLOY] without XX means [DEPLOY VERSION]
+              If no [DEPLOY XXX] tag is present, defaulting to SNAPSHOT maven deployment build
+              -->
+              <property>buildFlag.deployment</property>
+              <regex>.*\[DEPLOY\s+(VERSION|SNAPSHOT|SKIP)+].*|.*\[(DEPLOY)+].</regex>
+              <text>${git.commit.message.full}</text>
+              <caseSensitive>false</caseSensitive>
+              <toLowerCase>true</toLowerCase>
+              <defaultValue>SNAPSHOT</defaultValue>
+            </extraction>
+          </extractions>
         </configuration>
       </execution>
     </executions>    
